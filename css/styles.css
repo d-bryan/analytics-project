@@ -1,0 +1,136 @@
+
+a {
+  text-decoration: none;
+  color: rgb(209, 204, 135);
+}
+
+.page-wrap {
+  height: calc(100vh - 100px);
+  position: relative;
+}
+
+/******************** NAVIGATION ******************/
+.header-nav {
+background-color: cadetblue;
+width: 101.5%;
+height: 80px;
+padding-top: 1rem;
+margin-top: -12px;
+margin-left: -10px;
+position: relative;
+border-radius: 0 0 30px 30px;
+box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.5);
+}
+
+.header-nav h1 {
+  position: absolute;
+  font-family: 'Roboto', sans-serif;
+  color: rgb(209, 204, 135);
+  top: 10%;
+  left: 5%;
+}
+
+.header-nav nav {
+  padding-bottom: 3rem;
+  position: absolute;
+  top: 25%;
+  right: 5%;
+}
+
+.header-nav li {
+  padding-right: 3rem;
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25rem;
+}
+
+/******************** USERS ******************/
+#user-bio-container {
+  /* margin-top: 3rem; */
+  margin: 3rem auto 3rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-family: 'Roboto', sans-serif;
+}
+
+.user-section-card {
+  flex-wrap: wrap;
+  flex: 1 auto;
+  justify-content: space-evenly;
+  background-color: #e0e0e0;
+  width: 20%;
+  padding-top: 2.5rem;
+  padding-bottom: 1.5rem;
+  text-align: center;
+  border-radius: 20px;
+  margin: 2rem;
+}
+
+.card-img {
+  /* width: 200px; */
+  width: 12vw;
+  border-radius: 20px;
+  box-shadow: 10px 10px 1px rgb(209, 204, 135), -10px -10px 1px cadetblue;
+}
+
+.card-text {
+  font-size: 1rem;
+}
+
+.video-link {
+  background-color: cadetblue;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+#iframe-player {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 100%;
+  width: 60%;
+  text-align: center;
+  margin: 0 auto;
+  z-index: 3;
+  position: absolute;
+  top: 50%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 10%;
+}
+
+.modal {
+  position: absolute;
+  top: 15%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+#modal-close-btn {
+  background-color: #fff;
+  width: 640px;
+  height: 30px;
+  font-size: 18px;
+}
+
+/******************** VIDEOS ******************/
+#videos-conatiner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 2.5rem auto;
+  text-align: center;
+}
+
+.video-section {
+  /* width: 100%; */
+  margin: 0 auto;
+  text-align: center;
+  flex: 1 auto;
+  flex-basis: 50%;
+}
