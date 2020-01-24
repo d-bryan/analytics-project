@@ -19,42 +19,6 @@
     }
   }
 
-  // function createVideoElements (array) {
-  // const videoContainer = document.getElementById('videos-conatiner');
-
-  //   array.map((item, index) => {
-  //     let frameContainer = document.createElement('section');
-
-  //     setAttributes(frameContainer, {
-  //       'class': 'video-section',
-  //       'data-video-number': index
-  //     });
-
-  //     // <div class="iframe-click">
-
-  //     let page = `
-        
-  //         <iframe
-  //           class="on-click"
-  //           frameborder="0"
-  //           allowfullscreen="1"
-  //           allow="autoplay;"
-  //           width="750"
-  //           height="450"
-  //           src="https://www.youtube.com/embed/${item}"
-  //           >
-  //         </iframe>
-        
-  //     `;
-  //     // </div>
-
-  //     frameContainer.innerHTML = page;
-  //     videoContainer.append(frameContainer);
-
-  //   });
-
-  // }
-
   function createDivContainers (array) {
   const mainDiv = document.getElementById('main-video');
 
@@ -107,11 +71,6 @@
   function onPlayerStateChange(event) {
     var videosrc = event.target.getVideoUrl();
 
-    // if (event.data == YT.PlayerState.PLAYING && !done) {
-    //   setTimeout(stopVideo, 6000);
-    //   done = true;
-    // }
-
     if (event.data == -1) { // unstarted video
 
       ga(function(tracker) {
@@ -151,5 +110,3 @@
   }
 
   createDivContainers(videosArray);
-
-  // window.onload = () => setAnalytics()

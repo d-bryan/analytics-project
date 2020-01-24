@@ -217,8 +217,6 @@ const videosArray = [
   }
 
   function onButtonClick (event) {
-    // const buttons = document.getElementsByTagName('button');
-    // console.log(buttons);
 
     if (event.target.tagName === 'BUTTON') {
       var currentButton = event.target.innerHTML;
@@ -231,13 +229,6 @@ const videosArray = [
         return (num + 1).toString() 
       })() 
       var userGender = sectionContainer.getAttribute('data-gender');
-
-      console.log(currentButton);
-      console.log(cardInfoContainer);
-      console.log(userName);
-      console.log(sectionContainer);
-      console.log(cardNumber);
-      console.log(userGender);
 
       ga(function(tracker) {
         // send the text of the button they clicked on
@@ -266,26 +257,11 @@ const videosArray = [
         })
       });
 
-
     }
-    
-
-
+  
   }
-
-
 
   bioContainer.addEventListener('click', onButtonClick, false);
 
-
-
-
-
-
-
-
-
   // fetch the user data
   fetchData(`${userAPI}?${nationality}&${numUsers}`);
-
-

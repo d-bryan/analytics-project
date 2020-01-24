@@ -12,7 +12,8 @@ var products = [
     price: 25.00,
     quantity: 1,
     tax: 0.06,
-    shipping: 0.10,
+    // shipping: 0.10,
+    shipping: 0.05,
     imageLocation: 'https://underarmour.scene7.com/is/image/Underarmour/V5-1326413-001_FC_Main?template=v65GridLarge&$wid=281&$hei=345',
   },
   {
@@ -26,7 +27,8 @@ var products = [
     price: 140.00,
     quantity: 1,
     tax: 0.06,
-    shipping: 0.10,
+    // shipping: 0.10,
+    shipping: 0.05,
     imageLocation: 'https://underarmour.scene7.com/is/image/Underarmour/3022024-402_DEFAULT?template=v65GridLarge&$size=253,311&$wid=281&$hei=345',
   },
   {
@@ -40,7 +42,8 @@ var products = [
     price: 20.00,
     quantity: 1,
     tax: 0.06,
-    shipping: 0.10,
+    // shipping: 0.10,
+    shipping: 0.05,
     imageLocation: 'https://underarmour.scene7.com/is/image/Underarmour/1298746-001_ASSTSTKDL?template=v65GridSmallRetina&$size=270,331&$wid=300&$hei=368',
   },
   {
@@ -54,7 +57,8 @@ var products = [
     price: 55.00,
     quantity: 1,
     tax: 0.06,
-    shipping: 0.10,
+    // shipping: 0.10,
+    shipping: 0.05,
     imageLocation: 'https://underarmour.scene7.com/is/image/Underarmour/V5-1355598-628_FC_Main?template=v65GridSmallRetina&$wid=300&$hei=368',
   },
   {
@@ -68,7 +72,8 @@ var products = [
     price: 110.00,
     quantity: 1,
     tax: 0.06,
-    shipping: 0.10,
+    // shipping: 0.10,
+    shipping: 0.05,
     imageLocation: 'https://underarmour.scene7.com/is/image/Underarmour/3022596-400_DEFAULT?template=v65GridSmallRetina&$size=270,331&$wid=300&$hei=368',
   },
   {
@@ -82,7 +87,18 @@ var products = [
     price: 60.00,
     quantity: 1,
     tax: 0.06,
-    shipping: 0.10,
+    // shipping: 0.10,
+    shipping: 0.05,
     imageLocation: 'https://underarmour.scene7.com/is/image/Underarmour/V5-1352744-662_FC_Main?template=v65GridSmallRetina&$wid=300&$hei=368',
   },
 ];
+
+products.forEach(item => {
+  ga('ec:addImpression', {
+    'id': item.id.toString(),
+    'name': item.title,
+    'category': item.category,
+    'brand': item.category,
+    'variant': item.variant,
+  })
+})
