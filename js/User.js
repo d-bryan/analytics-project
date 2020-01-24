@@ -1,4 +1,5 @@
 'use strict';
+const bioContainer = document.getElementById('user-bio-container');
 // users api request parameters
 const userAPI = 'https://randomuser.me/api/';
 const maleUsers = 'gender=male';
@@ -8,8 +9,9 @@ const numUsers = 'results=24';
 // videos array
 const videosArray = [
   'MijmeoH9LT4', 'M7lc1UVf-VE', 'v-F3YLd6oMw', 'HluANRwPyNo', 'AslncyG8whg', 'FSs_JYwnAdI',
-  'PylQlISSH8U', 'gwp2rL_fdmY', 'sakQbeRjgwg'
+  'PylQlISSH8U', 'sakQbeRjgwg'
 ];
+
 
 
 
@@ -19,18 +21,19 @@ const videosArray = [
    */
   function checkStatus (response) {
     if (response.ok) {
-      console.log('resolved');
       return Promise.resolve(response);
     } else {
-      console.log('rejected');
       return Promise.reject(new Error(response.statusText));
     }
   }
 
+  /**
+   * returns a random video from the array
+   * @param {ARRAY} array - string of videos for youtube player
+   */
   function getRandomVideo (array) {
-    console.log(array.length)
     let num = Math.floor(array.length * Math.random());
-    return videosArray[num];
+    return array[num];
   }
 
   
@@ -55,7 +58,6 @@ const videosArray = [
    * @param {DATA} array - users data array to map
    */
   function mapCards (array) {
-    const mainContainer = document.getElementById('user-bio-container');
     array.map((item, index) => {
       // create container for user info
       let cardSection = document.createElement('section');
@@ -78,7 +80,7 @@ const videosArray = [
       `;
       // add the card to the page
       cardSection.innerHTML = page;
-      mainContainer.append(cardSection);
+      bioContainer.append(cardSection);
 
     });
   }
@@ -106,6 +108,9 @@ const videosArray = [
     })
   }
 
+  /**
+   * Sets the iframe contianer display to none and removes all children elements from the dom 
+   */
   function clearVideoModal () {
     const modalContainer = document.getElementById('iframe-player');
     const iframeContainer = document.getElementById('iframe-player');
@@ -116,6 +121,13 @@ const videosArray = [
     iframeContainer.style.display = 'none';
   }
 
+  // 2. This code loads the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
   function createVideoModal () {
     const modalContainer = document.getElementById('iframe-player');
     const iframeContainer = document.getElementById('iframe-player');
@@ -123,21 +135,30 @@ const videosArray = [
     if (modalContainer.firstChild) {
       clearVideoModal();
     }
+
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+
+        player = new YT.Player('player', { //'player-0'
+          height: '390',
+          width: '640',
+          videoId: getRandomVideo(videosArray), //'M7lc1UVf-VE'
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+        return player;
+      }
     
 
     const modalCard = `
       <div class="modal">
         <button type="button" id="modal-close-btn" onClick="clearVideoModal()">Close</button>
-        <div class="modal-info-container">
-          <iframe 
-          frameborder="0"
-          allowfullscreen="1"
-          allow="autoplay;"
-          width="640"
-          height="390"
-          src="https://www.youtube.com/embed/${getRandomVideo(videosArray)}"
-          >
-          </iframe>
+          <div id="player"></div>
         </div>
       </div>
     `;
@@ -145,7 +166,117 @@ const videosArray = [
     iframeContainer.innerHTML = modalCard;
     iframeContainer.style.display = 'block';
 
+    onYouTubeIframeAPIReady();
+
   }
+
+  // 4. The API will call this function when the video player is ready.
+  function onPlayerReady(event) {
+    event.target.playVideo();
+  }
+
+  // 5. The API calls this function when the player's state changes.
+  //    The function indicates that when playing a video (state=1),
+  //    the player should play for six seconds and then stop.
+  
+  function onPlayerStateChange(event) {
+    var videosrc = event.target.getVideoUrl();
+
+    if (event.data == -1) { // unstarted video
+
+      ga(function(tracker) {
+        tracker.send('event', 'Video', 'load-time', `${videosrc}`);
+      })
+
+    } else if (event.data == 0) { // ended video
+      
+      ga(function(tracker) {
+        tracker.send('event', 'Video', 'finished-playing', `${videosrc}`);
+      })
+
+    } else if (event.data == 1) { // playing video
+      
+      ga(function(tracker) {
+        tracker.send('event', 'Video', 'video-playing', `${videosrc}`);
+      })
+
+    } else if (event.data == 2) { // paused video
+      
+      ga(function(tracker) {
+        tracker.send('event', 'Video', 'video-paused', `${videosrc}`);
+      })
+
+    } else if (event.data == 3) { // buffering video
+      
+      ga(function(tracker) {
+        tracker.send('event', 'Video', 'video-loading', `${videosrc}`);
+      })
+
+    } 
+
+  }
+
+  function onButtonClick (event) {
+    // const buttons = document.getElementsByTagName('button');
+    // console.log(buttons);
+
+    if (event.target.tagName === 'BUTTON') {
+      var currentButton = event.target.innerHTML;
+      var cardInfoContainer = event.target.parentNode;
+      var userName = cardInfoContainer.firstElementChild.innerHTML;
+      var sectionContainer = cardInfoContainer.parentNode;
+      var cardNumber = (function() {
+        // function to set index number starting 1 higher so it does not have 0 start index for           analytics to confuse users
+        var num = parseInt(sectionContainer.getAttribute('data-card-number'), 10);
+        return (num + 1).toString() 
+      })() 
+      var userGender = sectionContainer.getAttribute('data-gender');
+
+      console.log(currentButton);
+      console.log(cardInfoContainer);
+      console.log(userName);
+      console.log(sectionContainer);
+      console.log(cardNumber);
+      console.log(userGender);
+
+      ga(function(tracker) {
+        // send the text of the button they clicked on
+        tracker.send('event', {
+          eventCategory: 'Users',
+          eventAction: 'click',
+          eventLabel: `${currentButton}`
+        });
+        // send the number of the card they clicked on
+        tracker.send('event', {
+          eventCategory: 'Users',
+          eventAction: 'click',
+          eventLabel: `Section Number ${cardNumber}`
+        });
+        // send the name of the user they clicked on
+        tracker.send('event', {
+          eventCategory: 'Users',
+          eventAction: 'click',
+          eventLabel: `User Name ${userName}`
+        });
+        // send the gender of the user they clicked on
+        tracker.send('event', {
+          eventCategory: 'Users',
+          eventAction: 'click',
+          eventLabel: `User Gender ${userGender}`
+        })
+      });
+
+
+    }
+    
+
+
+  }
+
+
+
+  bioContainer.addEventListener('click', onButtonClick, false);
+
 
 
 
