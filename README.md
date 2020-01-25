@@ -1,5 +1,7 @@
 # Analytics Project
 
+[LIVE DEMO](https://d-bryan.github.io/analytics-project/products.html)
+
 ## Getting Started
 
 Most, if not all, of the content for the pages is generated using javaScript. There are container divs on each page to mount all of the content to, similar to react.
