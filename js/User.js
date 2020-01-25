@@ -12,9 +12,6 @@ const videosArray = [
   'PylQlISSH8U', 'sakQbeRjgwg'
 ];
 
-
-
-
   /**
    * checks fetch request to see if returned (200) and resolves response
    * @param {RESPONSE} response - fetch http response

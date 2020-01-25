@@ -4,6 +4,10 @@ a {
   color: rgb(209, 204, 135);
 }
 
+button {
+  cursor: pointer;
+}
+
 .page-wrap {
   height: calc(100vh - 100px);
   position: relative;

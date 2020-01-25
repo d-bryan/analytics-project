@@ -122,7 +122,6 @@ function removeItemFromCart(event) {
 
         }
 
-
   }
 
 }
@@ -141,6 +140,7 @@ function addItemToCart (event) {
     const totalTax = document.getElementById('cart-total-tax');
     const totalShipping = document.getElementById('cart-total-shipping');
     var productQuantity = parseInt(event.target.previousElementSibling.previousElementSibling.value, 10);
+    var resetSelect = event.target.previousElementSibling.previousElementSibling;
     var productPrice = parseInt(event.target.parentNode.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.innerHTML, 10);
     var productId = event.target.parentNode.parentNode.getAttribute('data-product-id');
     var productTitle = event.target.parentNode.firstElementChild.innerHTML;
@@ -208,6 +208,8 @@ function addItemToCart (event) {
       ga('ec:setAction', 'add');
       ga('send', 'event', 'UX', 'click', 'add to cart');
 
+      // reset the select option
+      resetSelect.value = 0;
 
     }
 
@@ -216,7 +218,10 @@ function addItemToCart (event) {
 }
 
 
-
+/**
+ * Takes JSON and maps to template
+ * @param {ARRAY} array - array of products from products.js
+ */
 function createProducts (array) {
   
   array.forEach((item, index) => {
@@ -257,16 +262,19 @@ function createProducts (array) {
       </div>
     `;
 
+    // add mens category heading to page
     if (index === 0) {
       h2.textContent = 'Men\'s';
       mainContainer.append(h2)
     }
 
+    // add womens category heading to page
     if (index === 3) {
       h2.textContent = 'Women\'s';
       mainContainer.append(h2)
     }
 
+    // add the content to the page
     section.innerHTML = page;
     mainContainer.append(section);
 
@@ -312,23 +320,3 @@ window.onload = () => {
   // add the cart text to the page
   createCart();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
