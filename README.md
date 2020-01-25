@@ -1,6 +1,6 @@
 # Analytics Project
 
-[LIVE DEMO](https://d-bryan.github.io/analytics-project/products.html)
+[LIVE DEMO](https://d-bryan.github.io/analytics-project/index.html)
 
 ## Getting Started
 
