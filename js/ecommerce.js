@@ -4,6 +4,9 @@
 const h1 = document.createElement('h1');
 const mainContainer = document.getElementById('ecommerce-products');
 const mainProductCartContainer = document.getElementById('products-cart-container');
+const hostName = "https://d-bryan.github.io/analytics-project/";
+const localHostName = "http://127.0.0.1:5500/";
+
 var cartSubtotal = 0;
 var cartTotalTax = 0;
 var cartTotalShipping = 0;
@@ -134,6 +137,7 @@ function addItemToCart (event) {
 
 
   if (event.target.tagName === 'BUTTON') {
+    const checkoutError = document.getElementById('checkout-error');
     var sumProducts, sumTax, sumShipping;
     const cartContainer = document.getElementById('product-cart-section');
     const total = document.getElementById('cart-subtotal');
@@ -167,8 +171,12 @@ function addItemToCart (event) {
       data-product-category="${productCategory}"
       data-product-brand="${productBrand}"
       data-product-variant="${productVariant}"
+      data-product-title="${productTitle}"
+      data-product-description="${productDescription}"
+      data-product-image-location="${productImageLocation}"
+      data-product-gender="${productGender}"
     >
-    <button class="remove-items-button">Remove</button>
+    <button id="remove-items-btn" class="remove-items-button">Remove</button>
         <img src="${productImageLocation}" alt="${productDescription}"/>
         <p class="product-title">${productTitle}</p>
         <p class="product-description">${productDescription}</p>
@@ -182,6 +190,8 @@ function addItemToCart (event) {
     if (productQuantity === 0) {
       event.preventDefault();
     } else {
+      // set the checkout error display to none
+      checkoutError.style.display = 'none';
       // otherwise add to the cart
       cartContainer.insertAdjacentHTML('beforebegin', cartItem);
 
@@ -292,9 +302,13 @@ function createCart () {
   h2.textContent = 'Cart';
 
   let cart = `
+  <div id="products-checkout-container">
+    <p id="checkout-error">You must add items to your cart</p>
     <p id="cart-total-tax">Tax added is: ${cartTotalTax}</p>
     <p id="cart-total-shipping">Shipping added is: ${cartTotalShipping}</p>
     <p id="cart-subtotal">Your total is: ${cartSubtotal}</p>
+    <button id="products-checkout">Checkout</button>
+  </div>
   `;
 
   // set the inner html to the section
@@ -304,9 +318,71 @@ function createCart () {
   mainProductCartContainer.append(section);
 }
 
-// add the event listeners to the page
-mainContainer.addEventListener('click', addItemToCart, false);
-mainProductCartContainer.addEventListener('click', removeItemFromCart, false);
+/**
+ * Sets the items in the cart to local storage to be used in the cart to show the user
+ * @param {ARRAY} array - items in cart for checkout
+ */
+function createStorageForCheckout (array) {
+  array.forEach((item, index) => {
+    // localStorage.setItem(item.dataset.productTitle, JSON.stringify(item.dataset));
+    localStorage.setItem( `item-${index}`, JSON.stringify(item.dataset) );
+  });
+}
+
+// function allStorage() {
+//   var archive = {},
+//       keys = Object.keys(localStorage),
+//       i = keys.length;
+
+//   while ( i-- ) {
+//       archive[ keys[i] ] = JSON.parse(localStorage.getItem( keys[i] ));
+//   }
+//   console.log(archive)
+//   return archive;
+// }
+
+function checkoutItems (event) {
+  // prevent the event from bubbling to the container for remove elements
+  event.stopPropagation();
+
+  // if the target id matches the checkout button id
+  if (event.target.id === 'products-checkout') {
+    const checkoutError = document.getElementById('checkout-error');
+    var totalZero = event.target.previousElementSibling.textContent.slice(15, 16);
+
+    // if the total is zero do nothing and show error to user
+    if (totalZero === '0') {
+      event.preventDefault();
+      checkoutError.style.display = 'block';
+
+      // proceed with checkout and move to checkout page
+    } else {
+      const cartItems = document.querySelectorAll('section.cart-item');
+      console.log(cartItems)
+      checkoutError.style.display = 'none';
+      var totalTax = event.target.parentNode.firstElementChild.nextElementSibling.textContent.slice(15, event.target.parentNode.firstElementChild.textContent.length);
+      var totalShipping = event.target.previousElementSibling.previousElementSibling.textContent.slice(20, event.target.previousElementSibling.previousElementSibling.textContent.length);
+      var totalCost = event.target.previousElementSibling.textContent.slice(16, event.target.previousElementSibling.textContent.length);
+
+      // create local storage for tax, shipping and subtotal
+      localStorage.setItem('totalTax', totalTax);
+      localStorage.setItem('totalShipping', totalShipping);
+      localStorage.setItem('totalCost', totalCost);
+
+      // create local storage for items in cart
+      createStorageForCheckout(cartItems);
+
+      // allStorage();
+
+      // move the user to checkout
+      window.location.href = `${localHostName}checkout.html`;
+    
+    }
+
+    
+  }
+}
+
 
 // add the items to the page
 window.onload = () => {
@@ -319,4 +395,19 @@ window.onload = () => {
   createProducts(products);
   // add the cart text to the page
   createCart();
+
+  // get the container element for the checkout after creating it
+  const productsCheckoutContainer = document.getElementById('products-checkout-container');
+  // add the event listener for moving items to checkout.html
+  productsCheckoutContainer.addEventListener('click', checkoutItems, false);
+
 }
+
+
+
+
+// add the event listeners to the page
+mainContainer.addEventListener('click', addItemToCart, false);
+mainProductCartContainer.addEventListener('click', removeItemFromCart, false);
+
+

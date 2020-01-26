@@ -144,7 +144,7 @@ box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.5);
 #ecommerce-products,
 #products-cart-container {
   text-align: center;
-  margin: 3rem auto;
+  margin: 2rem auto;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -256,4 +256,129 @@ box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.5);
   width: fit-content;
   color: #fff;
   border: none;
+}
+
+#products-checkout {
+  padding: 5px 12px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  background-color: rgba(220, 20, 60, 0.9);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+#checkout-error {
+  display: none;
+  color: rgba(220, 20, 60, 0.9);
+}
+
+#products-checkout-container {
+  text-align: center;
+}
+
+/******************** CHECKOUT ******************/
+#checkout-form {
+  margin: 5rem auto;
+  width: 50%;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  background-color: #e0e0e0;
+  padding: 1.75rem .5rem;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+#checkout-form fieldset {
+  border: none;
+  margin: 1rem 0;
+}
+
+#checkout-form legend {
+  font-size: 22px;
+  margin: .75rem 0;
+  text-decoration: underline;
+}
+
+#checkout-form select {
+  margin: .75rem auto;
+  background-color: #fff;
+  color: #000;
+  width: 30%;
+  padding: 5px 8px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+#checkout-form input[type="checkbox"] {
+  margin: .75rem 0;
+  padding: 0 1.5rem;
+}
+
+#form-submit-btn,
+#form-cancel-btn {
+  margin: .75rem auto .75rem;
+  padding: 10px 14px;
+  font-size: 16px;
+  border-radius: 10px;
+  width: 25%;
+}
+
+#form-submit-btn {
+  background-color: rgba(220, 20, 60, 0.9);
+  color: #fff;
+  margin-right: 1rem;
+}
+
+#form-cancel-btn {
+  background-color: #fff;
+  color: #000;
+  margin-left: 1rem;
+}
+
+#card-type {
+  margin-bottom: 1.5rem;
+}
+
+.card-image-logo {
+  width: 10%;
+  vertical-align: middle;
+  opacity: .4;
+  padding: 0 .25rem;
+}
+
+.form-fields {
+  margin-top: .75rem;
+  margin-bottom: .75rem;
+  margin-left: 1rem;
+  padding: 5px 8px;
+  width: 40%;
+  border-radius: 10px;
+}
+
+#products-form-checkout-container {
+  font-family: 'Roboto', sans-serif;
+  margin: 1.75rem auto;
+  justify-content: space-around;
+  text-align: center;
+  width: 70%;
+}
+
+#products-form-checkout-container section {
+  float: left;
+  padding: 1rem 1rem;
+  width: 25%;
+}
+
+#products-form-checkout-container img {
+  width: 100%;
+}
+
+.checkout-cart-item {
+  text-align: center;
+}
+
+#price-subtotals-container {
+  margin: 1rem auto;
+  text-align: center;
 }

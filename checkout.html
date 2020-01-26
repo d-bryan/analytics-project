@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-156711470-1', 'auto');
+
+    ga('require', 'ec');
+    ga('set', 'currencyCode', 'USD')
+    ga('send', 'pageview');
+  </script>
+  <!-- End Google Analytics -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Analytics Project</title>
+</head>
+<body>
+  <div class="page-wrap">
+
+    <!-- main navigation -->
+    <header class="header-nav">
+      <h1>Analytics Project</h1>
+      <nav>
+        <ul>
+          <li><a href="./index.html">Users</a></li>
+          <li><a href="./videos.html">Videos</a></li>
+          <li><a href="./products.html">Products</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="form-container-checkout">
+      <form id="checkout-form" action="./products.html">
+        <fieldset id="products-for-purchase">
+          <legend>Items In Cart:</legend>
+          <div id="products-form-checkout-container"></div>
+        </fieldset>
+        <fieldset>
+          <legend>Cost of my Gear</legend>
+          <div id="price-subtotals-container"></div>
+        </fieldset>
+        
+        <fieldset id="personal-information">
+          <legend>Personal Info:</legend>
+          <br>
+          <label for="firstNamePersonal">First Name</label>
+          <br>
+          <input 
+            type="text" 
+            name="firstNamePersonal" 
+            id="firstNamePersonal" 
+            class="form-fields" 
+            required="true"
+          >
+          <br>
+          <label for="lastNamePersonal">Last Name</label>
+          <br>
+          <input 
+            type="text" 
+            name="lastNamePersonal" 
+            id="lastNamePersonal" 
+            class="form-fields" 
+            required="true"
+          >
+          <br>
+          <label for="phoneNumberPersonal">Phone Number</label>
+          <br>
+          <input 
+            type="tel" 
+            name="phoneNumberPersonal" 
+            id="phoneNumberPersonal" 
+            class="form-fields" 
+            required="true"
+            minlength="10"
+            maxlength="11"
+            >
+          <br>
+          <label for="emailAddressPersonal">Email Address</label>
+          <br>
+          <input 
+            type="email" 
+            name="emailAddressPersonal" 
+            id="emailAddressPersonal" 
+            class="form-fields" 
+            required="true"
+          >
+          <br>
+          <label for="streetAddressPersonal">Address</label>
+          <br>
+          <input 
+            type="text" 
+            name="streetAddressPersonal" 
+            id="streetAddressPersonal" 
+            class="form-fields" 
+            required="true"
+          >
+          <br>
+          <label for="cityLocationPersonal">City</label>
+          <br>
+          <input 
+            type="text" 
+            name="cityLocationPersonal" 
+            id="cityLocationPersonal" 
+            class="form-fields" 
+            required="true"
+          >
+          <br>
+          <label for="stateLocationPersonal">State</label>
+          <br>
+          <select name="stateLocationPersonal" id="stateLocationPersonal" required="true">
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option>
+            <option value="AR">Arkansas</option>
+            <option value="CA">California</option>
+            <option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option>
+            <option value="DE">Delaware</option>
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="HI">Hawaii</option>
+            <option value="ID">Idaho</option>
+            <option value="IL">Illinois</option>
+            <option value="IN">Indiana</option>
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KT">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+            <option value="MA">Massachusetts</option>
+            <option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+            <option value="NE">Nebraska</option>
+            <option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+            <option value="NC">North Carolina</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option>
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option>
+            <option value="TN">Tennessee</option>
+            <option value="TX">Texas</option>
+            <option value="UT">Utah</option>
+            <option value="VT">Vermont</option>
+            <option value="VA">Virginia</option>
+            <option value="WA">Washington</option>
+            <option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+          </select>
+          <br>
+          <label for="zipCodePersonal">Zip Code</label>
+          <br>
+          <input 
+            type="number" 
+            name="zipCodePersonal" 
+            id="zipCodePersonal" 
+            class="form-fields" 
+            required="true"
+            minlength="5"
+            maxlength="5"
+          >
+        </fieldset>
+          <input type="checkbox" name="confirmInformation" id="confirmInformation">
+          <label for="confirmInformation">Is the information you entered in the Personal Info Section<br/> the same as your shipping address?</label>
+
+
+          <!-- shipping information group -->
+
+        <fieldset id="shipping-information">
+          <legend>Shipping Info:</legend>
+          <br>
+          <label for="firstNameShipping">First Name</label>
+          <br>
+          <input 
+            type="text" 
+            name="firstNameShipping" 
+            id="firstNameShipping" 
+            class="form-fields" 
+            required="true"
+          >
+          <br>
+          <label for="lastNameShipping">Last Name</label>
+          <br>
+          <input 
+            type="text" 
+            name="lastNameShipping" 
+            id="lastNameShipping" 
+            class="form-fields" 
+            required="true"
+          >
+          <br>
+          <label for="phoneNumberShipping">Phone Number</label>
+          <br>
+          <input 
+            type="tel" 
+            name="phoneNumberShipping" 
+            id="phoneNumberShipping" 
+            class="form-fields" 
+            required="true"
+            minlength="10"
+            maxlength="11"
+            >
+          <br>
+          <label for="streetAddressShipping">Address</label>
+          <br>
+          <input 
+            type="text" 
+            name="streetAddressShipping" 
+            id="streetAddressShipping" 
+            class="form-fields" 
+            required="true"
+          >
+          <br>
+          <label for="cityLocationShipping">City</label>
+          <br>
+          <input 
+            type="text" 
+            name="cityLocationShipping" 
+            id="cityLocationShipping" 
+            class="form-fields" 
+            required="true"
+          >
+          <br>
+          <label for="stateLocationShipping">State</label>
+          <br>
+          <select name="stateLocationShipping" id="stateLocationShipping" required="true">
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option>
+            <option value="AR">Arkansas</option>
+            <option value="CA">California</option>
+            <option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option>
+            <option value="DE">Delaware</option>
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="HI">Hawaii</option>
+            <option value="ID">Idaho</option>
+            <option value="IL">Illinois</option>
+            <option value="IN">Indiana</option>
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KT">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+            <option value="MA">Massachusetts</option>
+            <option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+            <option value="NE">Nebraska</option>
+            <option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+            <option value="NC">North Carolina</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option>
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option>
+            <option value="TN">Tennessee</option>
+            <option value="TX">Texas</option>
+            <option value="UT">Utah</option>
+            <option value="VT">Vermont</option>
+            <option value="VA">Virginia</option>
+            <option value="WA">Washington</option>
+            <option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+          </select>
+          <br>
+          <label for="zipCodeShipping">Zip Code</label>
+          <br>
+          <input 
+            type="number" 
+            name="zipCodeShipping" 
+            id="zipCodeShipping" 
+            class="form-fields" 
+            required="true"
+            minlength="5"
+            maxlength="5"
+          >
+        </fieldset>
+          
+          <!-- payment information group -->
+
+        <fieldset id="payment-information">
+          <legend>Payment Info:</legend>
+          <br>
+          <div id="card-type">
+            <img id="discover-img" class="card-image-logo" src="./media/discover.png" alt="discover card">
+            <img id="mastercard-img" class="card-image-logo" src="./media/master-card.jpg" alt="master card">
+            <img id="visa-img" class="card-image-logo" src="./media/visa.jpg" alt="visa card">
+            <img id="american-express-img" class="card-image-logo" src="./media/american-express.png" alt="american express">
+          </div>
+          <label for="cardNumberPayment">Card Number</label>
+          <br>
+          <input 
+            type="number" 
+            name="cardNumberPayment" 
+            id="cardNumberPayment" 
+            class="form-fields" 
+            required="true"
+            minlength="13"
+            maxlength="16"
+          >
+          <br>
+          <label for="zipCodePayment">Billing Zip Code</label>
+          <br>
+          <input 
+            type="number" 
+            name="zipCodePayment" 
+            id="zipCodePayment" 
+            class="form-fields" 
+            required="true"
+            minlength="5"
+            maxlength="5"
+            >
+          <br>
+          <label for="cvvPayment">CVV</label>
+          <br>
+          <input 
+            type="number" 
+            name="cvvPayment" 
+            id="cvvPayment" 
+            class="form-fields" 
+            required="true"
+            minlength="3"
+            maxlength="3"
+            >
+        </fieldset>
+        <br>
+
+          <!-- submit buttons -->
+
+        <input type="submit" value="Get My Gear" id="form-submit-btn">
+        <input type="button" value="Cancel" id="form-cancel-btn">
+      </form>
+    </div>
+
+    <!-- end page wrap -->
+  </div>
+
+  <!-- footer -->
+  <div class="footer">
+
+  </div>
+  <script async defer type="text/javascript" src="js/checkout.js"></script>
+</body>
+</html>
