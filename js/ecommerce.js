@@ -329,18 +329,10 @@ function createStorageForCheckout (array) {
   });
 }
 
-// function allStorage() {
-//   var archive = {},
-//       keys = Object.keys(localStorage),
-//       i = keys.length;
-
-//   while ( i-- ) {
-//       archive[ keys[i] ] = JSON.parse(localStorage.getItem( keys[i] ));
-//   }
-//   console.log(archive)
-//   return archive;
-// }
-
+/**
+ * Proceeds the user to the checkout page, adds the items to local storage
+ * @param {CLICK} event - Checkout button click
+ */
 function checkoutItems (event) {
   // prevent the event from bubbling to the container for remove elements
   event.stopPropagation();
@@ -358,7 +350,7 @@ function checkoutItems (event) {
       // proceed with checkout and move to checkout page
     } else {
       const cartItems = document.querySelectorAll('section.cart-item');
-      console.log(cartItems)
+      
       checkoutError.style.display = 'none';
       var totalTax = event.target.parentNode.firstElementChild.nextElementSibling.textContent.slice(15, event.target.parentNode.firstElementChild.textContent.length);
       var totalShipping = event.target.previousElementSibling.previousElementSibling.textContent.slice(20, event.target.previousElementSibling.previousElementSibling.textContent.length);
@@ -372,14 +364,10 @@ function checkoutItems (event) {
       // create local storage for items in cart
       createStorageForCheckout(cartItems);
 
-      // allStorage();
-
       // move the user to checkout
-      window.location.href = `${localHostName}checkout.html`;
+      window.location.href = `${hostName}checkout.html`;
     
     }
-
-    
   }
 }
 
