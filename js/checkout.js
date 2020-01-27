@@ -75,11 +75,25 @@ function addCartItemsToPage (array) {
  */
 function addPriceTotalsToPage () {
   var priceSection = document.createElement('section');
-  var page = `
-    <p>Tax: $${priceStorage.totalTax}</p>
-    <p>Shipping: $${priceStorage.totalShipping}</p>
-    <p>Subtotal: $${priceStorage.totalCost}</p>
-  `;
+  var page;
+
+  // set the price values to 0 for when the page resets
+  if (priceStorage.totalTax === undefined ||
+      priceStorage.totalShipping === undefined ||
+      priceStorage.totalCost === undefined) {
+        page = `
+          <p id="checkout-total-tax">Tax: $0</p>
+          <p id="checkout-total-shipping">Shipping: $0</p>
+          <p id="checkout-total-cost">Subtotal: $0</p>
+        `;
+
+    } else {
+      page = `
+        <p id="checkout-total-tax">Tax: $${priceStorage.totalTax}</p>
+        <p id="checkout-total-shipping">Shipping: $${priceStorage.totalShipping}</p>
+        <p id="checkout-total-cost">Subtotal: $${priceStorage.totalCost}</p>
+      `;    
+    }
 
   priceSection.innerHTML = page;
   priceSubtotalsContainer.append(priceSection);
@@ -144,7 +158,7 @@ function checkForCardType (event) {
  */
 function cancelPurchase () {
   localStorage.clear();
-  window.location.href = `${hostName}products.html`;
+  window.location.href = `${hostName}products.html`; 
 }
 
 /**
@@ -209,7 +223,14 @@ function checkForDuplicateInformation (event) {
  */
 function checkoutItems (event) {
   var purcahseId = new Date().toISOString();
+  var totalTax = document.getElementById('checkout-total-tax');
+  var totalShipping = document.getElementById('checkout-total-shipping');
+  var totalCost = document.getElementById('checkout-total-cost');
   event.stopPropagation();
+
+  console.log(totalTax.textContent)
+  console.log(totalShipping.textContent)
+  console.log(totalCost.textContent)
 
   // if the event target is the submit button
   if(event.target.id === 'form-submit-btn') {
@@ -218,16 +239,34 @@ function checkoutItems (event) {
     if (!creditCardInput.value.match(regexCard)) {
       console.log('card error');
       event.preventDefault();
+      alert('Credit Card Number must be 13 - 16 digits');
 
       // if the zip code does not pass the regex prevent submission
     } else if (!zipCodePayment.value.match(regexZip)) {
       console.log('zip error');
       event.preventDefault();
+      alert('Zip code must be 5 digits');
 
       // if the cvv number does not pass the regex prevent submission
     } else if (!cvvPayment.value.match(regexCVV)) {
       console.log('cvv error');
       event.preventDefault();
+      alert('CVV must be 3 digits');
+
+      // if the user has no items in their cart prevent submission
+    } else if (totalTax.textContent === 'Tax: $0') {
+      event.preventDefault();
+      alert('You have no items in your cart');
+
+      // if the user has no items in their cart prevent submission
+    } else if (totalShipping.textContent === 'Shipping: $0') {
+      event.preventDefault();
+      alert('You have no items in your cart');
+
+      // if the user has no items in their cart prevent submission
+    } else if (totalCost.textContent === 'Subtotal: $0') {
+      event.preventDefault();
+      alert('You have no items in your cart');
 
       // submit the form
     } else {
@@ -265,9 +304,6 @@ function checkoutItems (event) {
       
       // reset local storage
       localStorage.clear();
-
-      // send the user back to the products page
-      window.location.href = `${hostName}products.html`;
 
     }
   }

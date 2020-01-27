@@ -365,7 +365,7 @@ function checkoutItems (event) {
       createStorageForCheckout(cartItems);
 
       // move the user to checkout
-      window.location.href = `${hostName}checkout.html`;
+      window.location.href = `${hostName}checkout.html`; 
     
     }
   }
@@ -388,6 +388,9 @@ window.onload = () => {
   const productsCheckoutContainer = document.getElementById('products-checkout-container');
   // add the event listener for moving items to checkout.html
   productsCheckoutContainer.addEventListener('click', checkoutItems, false);
+
+  // clear local storage in case user returns to page
+  localStorage.clear();
 
 }
 
